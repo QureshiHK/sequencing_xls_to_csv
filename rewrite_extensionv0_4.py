@@ -1,6 +1,6 @@
 ###### Haseeb Qureshi 2024/09/06 v0.41
 
-###### changing suffix is not sufficient so switching to pandas to open xls into dataframe and save as csv
+
 
 import os
 import shutil
