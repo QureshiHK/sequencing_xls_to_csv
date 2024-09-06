@@ -1,11 +1,7 @@
 ###### Haseeb Qureshi 2024/09/06 v0.41
-
-
-
 import os
 import shutil
 import pandas as pd
-
 
 asksource= input('insert source path: ') #input full source directory path when prompted
 askdest=input('insert destination path: ') #input full output path
@@ -35,9 +31,6 @@ for a in listdirectory:
         read_df=pd.read_excel(a,sep='\s+')
         read_df.to_csv(newfilename)
         
-
         print('{} converted succesfully'.format(a))
-  
-    
 
 print('copy complete!')
