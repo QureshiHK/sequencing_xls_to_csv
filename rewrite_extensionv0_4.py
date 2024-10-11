@@ -1,4 +1,4 @@
-###### Haseeb Qureshi 2024/09/10 v0.5
+###### Haseeb Qureshi 2024/10/11 v0.6
 
 ###### changing suffix is not sufficient so switching to pandas to open xls into dataframe and save as csv
 
@@ -37,13 +37,19 @@ for a in listdirectory:
     prefix,extension = os.path.splitext(a)
     
     csvextension = '.csv'
-    if extension=='.xls': #coutnerintuitive to treat excel .xls files as csv but that seems to be the nature of thse novogene outputs for now. should add option to change file type, make it more dynamic.
+    extension_list = ['.xls','.csv','.xlsx']
+    if extension in extension_list: #coutnerintuitive to treat excel .xls files as csv but that seems to be the nature of thse novogene outputs for now. should add option to change file type, make it more dynamic.
         newfilename=dest_dir+prefix+csvextension #create file path for converted xls file
         print('1: ', newfilename) #sanity check
         
-        read_df=pd.read_csv(a,sep='\s+') #read weird .xls using space(s) as separator and create dataframe
-        read_df.to_csv(newfilename) #write new csv file (properly) from imported dataframe
-
+        ###find delimiter and declare as string to pass to sep argument in read_df
+        ###assuming the delimiters are either space and tab so try one or the other. If delimiter isn't either then it will just error out I guess.
+        try:
+            read_df=pd.read_csv(a,sep='\t') #read weird .xls using space(s) as separator and create dataframe
+            read_df.to_csv(newfilename) #write new csv file (properly) from imported dataframe
+        except:
+            read_df=pd.read_csv(a,sep='\s+') #read weird .xls using space(s) as separator and create dataframe
+            read_df.to_csv(newfilename) #write new csv file (properly) from imported dataframe            
         print('{} converted succesfully'.format(a))
     
     
